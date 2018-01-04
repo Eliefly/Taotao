@@ -7,5 +7,5 @@ public interface TestService {
      *
      * @return 当前时间
      */
-    public String queryNow();
+    String queryNow();
 }
