@@ -18,6 +18,13 @@ public class ItemCatController {
     @Autowired
     private ItemCatService itemCatService;
 
+    /**
+     * 商品类目查询
+     *
+     * @param page
+     * @param rows
+     * @return
+     */
     @RequestMapping("query/{page}")
     @ResponseBody
     public List<ItemCat> queryItemByPage(@PathVariable("page") Integer page, @RequestParam("rows") Integer rows) {

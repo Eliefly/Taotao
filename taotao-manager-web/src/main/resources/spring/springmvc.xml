@@ -25,6 +25,6 @@
     <dubbo:reference interface="com.taotao.service.TestService" id="testService" timeout="100000000"></dubbo:reference>
     <dubbo:reference interface="com.taotao.service.ItemCatService" id="itemCatService" timeout="100000000"></dubbo:reference>
 
-    <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
-    <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+    <mvc:resources location="/js/" mapping="page/js/**"></mvc:resources>
+    <mvc:resources location="/css/" mapping="page/css/**"></mvc:resources>
 </beans>
