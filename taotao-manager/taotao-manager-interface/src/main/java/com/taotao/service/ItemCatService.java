@@ -4,7 +4,7 @@ import com.taotao.pojo.ItemCat;
 
 import java.util.List;
 
-public interface ItemCatService {
+public interface ItemCatService extends BaseService<ItemCat> {
 
     /**
      * 分页查询商品类目
@@ -13,5 +13,5 @@ public interface ItemCatService {
      * @param rows
      * @return
      */
-    List<ItemCat> queryItemByPage(Integer page, Integer rows);
+//    List<ItemCat> queryItemByPage(Integer page, Integer rows);
 }

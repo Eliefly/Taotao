@@ -51,7 +51,8 @@ public class MapperTest {
     @Test
     public void test03() {
 
-        List<ItemCat> list = itemCatService.queryItemByPage(1, 10);
+//        List<ItemCat> list = itemCatService.queryItemByPage(1, 10);
+        List<ItemCat> list = itemCatService.queryByPage(1, 10);
 
         for (ItemCat itemCat : list) {
 

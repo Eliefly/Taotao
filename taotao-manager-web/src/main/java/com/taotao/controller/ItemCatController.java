@@ -29,7 +29,8 @@ public class ItemCatController {
     @ResponseBody
     public List<ItemCat> queryItemByPage(@PathVariable("page") Integer page, @RequestParam("rows") Integer rows) {
 
-        return itemCatService.queryItemByPage(page, rows);
+//        return itemCatService.queryItemByPage(page, rows);
 
+        return itemCatService.queryByPage(page, rows);
     }
 }

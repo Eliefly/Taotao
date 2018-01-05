@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ItemCatServiceImpl implements ItemCatService {
+public class ItemCatServiceImpl extends BaseServiceImpl<ItemCat> implements ItemCatService {
 
+/*  改造  ItemCatServiceImpl 继承  BaseServiceImpl, 直接使用 父类的分页查询
     @Autowired
     private ItemCatMapper itemCatMapper;
 
@@ -21,5 +22,8 @@ public class ItemCatServiceImpl implements ItemCatService {
         PageHelper.startPage(page, rows);
 
         return itemCatMapper.select(null);
-    }
+    }*/
+
+
+
 }
