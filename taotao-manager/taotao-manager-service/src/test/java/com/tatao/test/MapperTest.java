@@ -1,7 +1,6 @@
 package com.tatao.test;
 
 import com.taotao.mapper.ItemCatMapper;
-import com.taotao.mapper.TestMapper;
 import com.taotao.pojo.ItemCat;
 import com.taotao.service.ItemCatService;
 import com.taotao.service.TestService;

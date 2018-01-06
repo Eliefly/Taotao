@@ -1,10 +1,6 @@
 package com.taotao.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "tb_item_cat")
 public class ItemCat extends BasePojo {
@@ -25,6 +21,15 @@ public class ItemCat extends BasePojo {
 
     @Column(name = "is_parent")
     private Boolean isParent;
+
+    // 增加 text, state 属性的getter, 用于树形菜单初始化.
+    public String getText() {
+        return getName();
+    }
+
+    public String getState() {
+        return isParent ? "closed" : "open";
+    }
 
     public Long getId() {
         return id;

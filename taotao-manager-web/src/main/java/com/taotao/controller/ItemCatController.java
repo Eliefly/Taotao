@@ -4,10 +4,7 @@ import com.taotao.pojo.ItemCat;
 import com.taotao.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +29,20 @@ public class ItemCatController {
 //        return itemCatService.queryItemByPage(page, rows);
 
         return itemCatService.queryByPage(page, rows);
+    }
+
+    /**
+     * 通过 ParentId 查找商品类目
+     *
+     * @param parentId
+     * @returnCat
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    // 第一次请求是没有id参数，需要设置默认的parentId为0，查询一级类目
+    public List<ItemCat> queryItemByParentId(@RequestParam(name = "id", defaultValue = "0") Long parentId) {
+
+        return itemCatService.queryItemCatByParentId(parentId);
+
     }
 }

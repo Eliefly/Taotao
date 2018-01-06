@@ -9,6 +9,7 @@
 	            <td>商品类目:</td>
 	            <td>
 	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a>
+	            	<span ></span>
 	            	<input type="hidden" name="cid" style="width: 280px;"></input>
 	            </td>
 	        </tr>
@@ -22,8 +23,7 @@
 	        </tr>
 	        <tr>
 	            <td>商品价格:</td>
-	            <td><input class="easyui-numberbox" type="text" name="priceView" data-options="min:1,max:99999999,precision:2,required:true" />
-	            	<input type="hidden" name="price"/>
+	            <td><input class="easyui-numberbox" type="text" name="price" data-options="min:1,max:99999999,precision:2,required:true" />
 	            </td>
 	        </tr>
 	        <tr>
@@ -40,6 +40,7 @@
 	            <td>商品图片:</td>
 	            <td>
 	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">上传图片</a>
+	            	 <div class="pics"><ul></ul></div>
 	                 <input type="hidden" name="image"/>
 	            </td>
 	        </tr>
@@ -64,57 +65,52 @@
 	</div>
 </div>
 <script type="text/javascript">
+	//编辑器参数
+	kingEditorParams = {
+		filePostName  : "uploadFile",  //上传的文件名 
+		uploadJson : '/pic/upload', //上传的路径
+		dir : "image"   //上传的文件类型
+	};
+	
 	var itemAddEditor ;
-	//页面初始化完毕后执行此方法
+	
+	//页面加载完时执行以下逻辑
 	$(function(){
 		//创建富文本编辑器
-		itemAddEditor = TAOTAO.createEditor("#itemAddForm [name=desc]");
-		//初始化类目选择和图片上传器
-		TAOTAO.init({fun:function(node){
-			//根据商品的分类id取商品 的规格模板，生成规格信息。第四天内容。
-			//TAOTAO.changeItemParam(node, "itemAddForm");
-		}});
+		itemAddEditor = KindEditor.create("#itemAddForm [name=desc]", kingEditorParams);
+		//初始化类目选择
+		initItemCat();
+		//初始化图片上传
+		initPicUpload();
 	});
-	//提交表单
+	
+	//提交商品信息到后台
 	function submitForm(){
-		//有效性验证
+		//校验表单
 		if(!$('#itemAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		//取商品价格，单位为“分”
-		$("#itemAddForm [name=price]").val(eval($("#itemAddForm [name=priceView]").val()) * 100);
-		//同步文本框中的商品描述
+		
+		//把富文本编辑器编辑区域的html代码。同步到多行文本中，向后台提交的是多行文本
+		//因为编辑器的编辑区域是div标签，不能提交
 		itemAddEditor.sync();
-		//取商品的规格
-		/*
-		var paramJson = [];
-		$("#itemAddForm .params li").each(function(i,e){
-			var trs = $(e).find("tr");
-			var group = trs.eq(0).text();
-			var ps = [];
-			for(var i = 1;i<trs.length;i++){
-				var tr = trs.eq(i);
-				ps.push({
-					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
-					"v" : $.trim(tr.find("input").val())
-				});
-			}
-			paramJson.push({
-				"group" : group,
-				"params": ps
-			});
-		});
-		//把json对象转换成字符串
-		paramJson = JSON.stringify(paramJson);
-		$("#itemAddForm [name=itemParams]").val(paramJson);
-		*/
-		//ajax的post方式提交表单
-		//$("#itemAddForm").serialize()将表单序列号为key-value形式的字符串
-		$.post("/item/save",$("#itemAddForm").serialize(), function(data){
-			if(data.status == 200){
-				$.messager.alert('提示','新增商品成功!');
-			}
+				
+		//提交到后台的RESTful
+		$.ajax({
+		   type: "POST",
+		   url: "/item",
+		   data: $("#itemAddForm").serialize(),
+		   success: function(msg){
+			   if(msg == "0"){
+				   $.messager.alert('提示','新增商品成功!');  
+			   }else{
+				   $.messager.alert('提示','新增商品发生异常，保存失败!'); 
+			   }
+		   },
+		   error: function(){
+			   $.messager.alert('提示','新增商品失败!');
+		   }
 		});
 	}
 	
@@ -122,4 +118,93 @@
 		$('#itemAddForm').form('reset');
 		itemAddEditor.html('');
 	}
+	
+	//类目选择初始化
+	function initItemCat(){
+		//获取class为selectItemCat的元素，其实就是类目选择按钮
+		var selectItemCat = $(".selectItemCat");
+		//给类目选择按钮增加点击事件
+   		selectItemCat.click(function(){
+   			//添加div标签，并设置css属性
+  			//在div标签里面添加ul标签，并打开窗口
+   			$("<div>").css({padding:"5px"}).html("<ul>")
+   			.window({
+   				//窗口属性设置
+   				width:'500',
+   			    height:"450",
+   			    modal:true,
+   			    closed:true,
+   			    iconCls:'icon-save',
+   			    title:'选择类目',
+   				//当窗口打开后执行的逻辑
+   			    onOpen : function(){
+   			   		//这里的this是打开的窗口本身
+   			    	var _win = this;
+   			   		//在窗口范围内，搜索ul标签
+  			    	//找到ul标签，并创建EasyUI树
+   			    	$("ul",_win).tree({
+   			    		//异步树，发起请求，创建树
+   			    		url:'/item/cat',
+   			    		method:'GET',
+   			    		animate:true,
+   			    		//给树上的所有节点添加点击事件
+   			    		onClick : function(node){
+   			    			if($(this).tree("isLeaf",node.target)){
+   			    				// 填写到cid中
+   			    				selectItemCat.parent().find("[name=cid]").val(node.id);
+   			    				selectItemCat.next().text(node.text);
+   			    				$(_win).window('close');
+   			    			}
+   			    		}
+   			    	});
+   			    },
+   			    onClose : function(){
+   			    	$(this).window("destroy");
+   			    }
+   			}).window('open');
+   		});
+    }
+	
+	//图片上传初始化
+	function initPicUpload(){
+		//class选择器，其实获取到的就是上传图片按钮，绑定点击事件
+       	$(".picFileUpload").click(function(){
+       		//id选择器，其实获取到的就是form表单
+       		var form = $('#itemAddForm');
+       		//加载多图片上传组件（可参考富文本编辑器的文档）
+       		KindEditor.editor(kingEditorParams).loadPlugin('multiimage',function(){
+       			//editor:就是编辑器本身
+       			var editor = this;
+       			//执行插件的逻辑，显示上传界面
+       			editor.plugin.multiImageDialog({
+       				//当点击“全部插入”按钮，执行以下逻辑
+       				//urlList：多图片上传成功后，返回的图片url
+					clickFn : function(urlList) {
+						//获取class为pics的li的标签，删除，清空之前上传的图片
+						$(".pics li").remove();
+						//声明图片url数组
+						var imgArray = [];
+						//遍历返回的图片url
+						//i遍历的坐标，data遍历的变量
+						KindEditor.each(urlList, function(i, data) {
+							//从遍历的数据中获取url，其实就是获取图片的url
+							//放到声明数组中
+							imgArray.push(data.url);
+							//获取class为pics的ul标签
+							//在后面追加li标签，回显上传成功的图片
+							$(".pics ul").append("<li><a href='"+data.url+"' target='_blank'><img src='"+data.url+"' width='80' height='50' /></a></li>");
+						});
+						//获取name=image的元素，其实就是获取图片上传的input标签
+						//往input标签里赋值
+						//imgArray.join(",")：把数据转为字符串，数组中的元素用，分隔
+						form.find("[name=image]").val(imgArray.join(","));
+						
+						//关闭上传界面
+						editor.hideDialog();
+					}
+				});
+       		});
+       	});
+	}
+	
 </script>

@@ -76,37 +76,25 @@
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		$("#itemeEditForm [name=price]").val(eval($("#itemeEditForm [name=priceView]").val()) * 1000);
+		//处理商品的价格的单位，将元转化为分
+		$("#itemeEditForm [name=price]").val(eval($("#itemeEditForm [name=priceView]").val()) * 100);
+		//将编辑器中的内容同步到隐藏的多行文本中
 		itemEditEditor.sync();
-		
-		var paramJson = [];
-		$("#itemeEditForm .params li").each(function(i,e){
-			var trs = $(e).find("tr");
-			var group = trs.eq(0).text();
-			var ps = [];
-			for(var i = 1;i<trs.length;i++){
-				var tr = trs.eq(i);
-				ps.push({
-					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
-					"v" : $.trim(tr.find("input").val())
-				});
-			}
-			paramJson.push({
-				"group" : group,
-				"params": ps
-			});
-		});
-		paramJson = JSON.stringify(paramJson);
-		
-		$("#itemeEditForm [name=itemParams]").val(paramJson);
-		
-		$.post("/rest/item/update",$("#itemeEditForm").serialize(), function(data){
-			if(data.status == 200){
-				$.messager.alert('提示','修改商品成功!','info',function(){
+				
+		//提交到后台的RESTful
+		$.ajax({
+		   type: "POST",
+		   url: "/rest/item/update",
+		   data: $("#itemeEditForm").serialize(),
+		   success: function(msg){
+			   $.messager.alert('提示','修改商品成功!','info',function(){
 					$("#itemEditWindow").window('close');
 					$("#itemList").datagrid("reload");
 				});
-			}
+		   },
+		   error: function(){
+			   $.messager.alert('提示','修改商品失败!');
+		   }
 		});
 	}
 </script>

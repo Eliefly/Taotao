@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <table class="easyui-datagrid" id="itemList" title="商品列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/list',method:'get',pageSize:30,toolbar:toolbar">
+       data-options="singleSelect:false,collapsible:true,pagination:true,url:'/rest/item',method:'get',pageSize:30,toolbar:toolbar">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'id',width:60">商品ID</th>
-            <th data-options="field:'title',width:200">商品标题</th>
+            <th data-options="field:'title',width:200,formatter:TAOTAO.formatText">商品标题</th>
             <th data-options="field:'cid',width:100">叶子类目</th>
-            <th data-options="field:'sellPoint',width:100">卖点</th>
+            <th data-options="field:'sellPoint',width:100,formatter:TAOTAO.formatText">卖点</th>
             <th data-options="field:'price',width:70,align:'right',formatter:TAOTAO.formatPrice">价格</th>
             <th data-options="field:'num',width:70,align:'right'">库存数量</th>
-            <th data-options="field:'barcode',width:100">条形码</th>
+            <th data-options="field:'barcode',width:100,formatter:TAOTAO.formatText">条形码</th>
             <th data-options="field:'status',width:60,align:'center',formatter:TAOTAO.formatItemStatus">状态</th>
             <th data-options="field:'created',width:130,align:'center',formatter:TAOTAO.formatDateTime">创建日期</th>
             <th data-options="field:'updated',width:130,align:'center',formatter:TAOTAO.formatDateTime">更新日期</th>
@@ -60,47 +60,13 @@
         			$("#itemeEditForm").form("load",data);
         			
         			// 加载商品描述
-        			$.getJSON('/rest/item/query/item/desc/'+data.id,function(_data){
-        				if(_data.status == 200){
-        					//UM.getEditor('itemeEditDescEditor').setContent(_data.data.itemDesc, false);
-        					itemEditEditor.html(_data.data.itemDesc);
-        				}
+        			$.getJSON('/rest/item/desc/'+data.id,function(_data){
+        				itemEditEditor.html(_data.itemDesc);
         			});
-        			
-        			//加载商品规格
-        			$.getJSON('/rest/item/param/item/query/'+data.id,function(_data){
-        				if(_data && _data.status == 200 && _data.data && _data.data.paramData){
-        					$("#itemeEditForm .params").show();
-        					$("#itemeEditForm [name=itemParams]").val(_data.data.paramData);
-        					$("#itemeEditForm [name=itemParamId]").val(_data.data.id);
-        					
-        					//回显商品规格
-        					 var paramData = JSON.parse(_data.data.paramData);
-        					
-        					 var html = "<ul>";
-        					 for(var i in paramData){
-        						 var pd = paramData[i];
-        						 html+="<li><table>";
-        						 html+="<tr><td colspan=\"2\" class=\"group\">"+pd.group+"</td></tr>";
-        						 
-        						 for(var j in pd.params){
-        							 var ps = pd.params[j];
-        							 html+="<tr><td class=\"param\"><span>"+ps.k+"</span>: </td><td><input autocomplete=\"off\" type=\"text\" value='"+ps.v+"'/></td></tr>";
-        						 }
-        						 
-        						 html+="</li></table>";
-        					 }
-        					 html+= "</ul>";
-        					 $("#itemeEditForm .params td").eq(1).html(html);
-        				}
-        			});
-        			
+        			        			
         			TAOTAO.init({
         				"pics" : data.image,
-        				"cid" : data.cid,
-        				fun:function(node){
-        					TAOTAO.changeItemParam(node, "itemeEditForm");
-        				}
+        				"cid" : data.cid
         			});
         		}
         	}).window("open");
