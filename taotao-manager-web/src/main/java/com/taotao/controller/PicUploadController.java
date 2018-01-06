@@ -1,6 +1,7 @@
 package com.taotao.controller;
 
-import com.taotao.pojo.PicUploadResult;
+import com.taotao.common.pojo.PicUploadResult;
+import com.taotao.common.util.JsonUtils;
 import com.taotao.web.util.FastDFSClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,13 +30,13 @@ public class PicUploadController {
 
     private static String[] TYPE = {".jpg", ".jpeg", ".png", ".bmp", ".gif"};
 
-    // filePostName : "uploadFile", //上传文件名
-    // uploadJson : '/rest/pic/upload', //图片上传请求路径
-    // dir : "image" //上传文件类型
+    // 火狐浏览器上传不成功
+    // 因为富文本编辑器的上传组件对浏览器的兼容不好，不能使用json的响应, 返回结果使用 JsonUtils 转化
+
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public PicUploadResult upload(MultipartFile uploadFile) throws Exception {
+    public String upload(MultipartFile uploadFile) throws Exception {
 
         // 声明标志
         boolean flag = false;
@@ -54,7 +55,7 @@ public class PicUploadController {
         }
         // 校验失败, 直接返回
         if (!flag) {
-            return picUploadResult;
+            return JsonUtils.objectToJson(picUploadResult);
         }
 
         // 重置标志位
@@ -83,7 +84,7 @@ public class PicUploadController {
             picUploadResult.setError(0);
         }
 
-        return picUploadResult;
+        return JsonUtils.objectToJson(picUploadResult);
 
     }
 

@@ -1,4 +1,4 @@
-package com.taotao.pojo;
+package com.taotao.common.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

@@ -1,6 +1,6 @@
 package com.taotao.service;
 
-import com.taotao.pojo.Item;
+import com.taotao.common.pojo.Item;
 
 public interface ItemService extends BaseService<Item> {
 

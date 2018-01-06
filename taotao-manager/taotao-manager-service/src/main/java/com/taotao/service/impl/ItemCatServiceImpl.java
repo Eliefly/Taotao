@@ -1,6 +1,6 @@
 package com.taotao.service.impl;
 
-import com.taotao.pojo.ItemCat;
+import com.taotao.common.pojo.ItemCat;
 import com.taotao.service.ItemCatService;
 import org.springframework.stereotype.Service;
 

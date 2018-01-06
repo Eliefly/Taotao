@@ -3,7 +3,7 @@ package com.taotao.service.impl;
 import com.github.abel533.entity.Example;
 import com.github.abel533.mapper.Mapper;
 import com.github.pagehelper.PageHelper;
-import com.taotao.pojo.BasePojo;
+import com.taotao.common.pojo.BasePojo;
 import com.taotao.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 

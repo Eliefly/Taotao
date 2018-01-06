@@ -1,6 +1,6 @@
 package com.taotao.service;
 
-import com.taotao.pojo.ItemCat;
+import com.taotao.common.pojo.ItemCat;
 
 import java.util.List;
 

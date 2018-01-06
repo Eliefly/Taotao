@@ -1,6 +1,6 @@
 package com.taotao.service.impl;
 
-import com.taotao.pojo.ItemDesc;
+import com.taotao.common.pojo.ItemDesc;
 import com.taotao.service.ItemDescService;
 import org.springframework.stereotype.Service;
 

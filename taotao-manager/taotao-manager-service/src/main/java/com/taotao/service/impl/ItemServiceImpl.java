@@ -1,7 +1,7 @@
 package com.taotao.service.impl;
 
-import com.taotao.pojo.Item;
-import com.taotao.pojo.ItemDesc;
+import com.taotao.common.pojo.Item;
+import com.taotao.common.pojo.ItemDesc;
 import com.taotao.service.ItemDescService;
 import com.taotao.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;

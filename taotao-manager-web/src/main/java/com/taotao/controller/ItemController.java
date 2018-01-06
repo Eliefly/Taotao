@@ -1,6 +1,6 @@
 package com.taotao.controller;
 
-import com.taotao.pojo.Item;
+import com.taotao.common.pojo.Item;
 import com.taotao.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.taotao.pojo;
+package com.taotao.common.pojo;
 
 /**
  * 图片上传结果
