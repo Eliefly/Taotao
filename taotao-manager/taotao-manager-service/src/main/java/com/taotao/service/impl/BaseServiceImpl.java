@@ -46,7 +46,7 @@ public class BaseServiceImpl<T extends BasePojo> implements BaseService<T> {
     @Override
     public List<T> queryListByWhere(T t) {
         return mapper.select(t);
-    }
+}
 
     @Override
     public List<T> queryByPage(Integer page, Integer rows) {

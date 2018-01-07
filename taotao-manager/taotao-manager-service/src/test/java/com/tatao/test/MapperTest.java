@@ -1,8 +1,13 @@
 package com.tatao.test;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.taotao.common.pojo.Item;
 import com.taotao.mapper.ItemCatMapper;
 import com.taotao.common.pojo.ItemCat;
+import com.taotao.mapper.ItemMapper;
 import com.taotao.service.ItemCatService;
+import com.taotao.service.ItemService;
 import com.taotao.service.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +33,8 @@ public class MapperTest {
     @Autowired
     private ItemCatService itemCatService;
 
+    @Autowired
+    private ItemService itemService;
 
     @Test
     public void test01() {
@@ -57,6 +64,19 @@ public class MapperTest {
 
             System.out.println(itemCat);
         }
+    }
+
+    @Test
+    public void test04() {
+
+        List<ItemCat> itemCats = itemCatService.queryByPage(1, 30);
+
+        for(ItemCat itemCat: itemCats) {
+            System.out.println(itemCat);
+        }
+
+        PageInfo<ItemCat> page = new PageInfo<>(itemCats);
+        System.out.println("total: " + page.getTotal());
     }
 
 }

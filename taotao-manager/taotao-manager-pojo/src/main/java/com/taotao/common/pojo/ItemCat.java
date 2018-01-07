@@ -79,4 +79,15 @@ public class ItemCat extends BasePojo {
         this.isParent = isParent;
     }
 
+    @Override
+    public String toString() {
+        return "ItemCat{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", sortOrder=" + sortOrder +
+                ", isParent=" + isParent +
+                '}';
+    }
 }

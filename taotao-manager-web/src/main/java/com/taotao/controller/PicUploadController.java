@@ -33,7 +33,13 @@ public class PicUploadController {
     // 火狐浏览器上传不成功
     // 因为富文本编辑器的上传组件对浏览器的兼容不好，不能使用json的响应, 返回结果使用 JsonUtils 转化
 
-
+    /**
+     * 图片上唇
+     *
+     * @param uploadFile
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public String upload(MultipartFile uploadFile) throws Exception {
@@ -59,7 +65,7 @@ public class PicUploadController {
         }
 
         // 重置标志位
-        flag = false;    // 图片内容校验
+        flag = false;
         try {
             BufferedImage image = ImageIO.read(uploadFile.getInputStream());
 
