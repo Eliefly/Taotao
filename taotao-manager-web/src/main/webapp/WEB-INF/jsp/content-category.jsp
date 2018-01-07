@@ -15,7 +15,7 @@ $(function(){
 	//id选择器，找到easyui-tree树控件元素
 	//创建树
 	$("#contentCategory").tree({
-		url : '/rest/content/category',
+		url : '/content/category',
 		animate: true,
 		method : "GET",
 		//在树菜单中点击鼠标右键，执行以下逻辑
@@ -39,7 +39,7 @@ $(function(){
         	if(node.id == 0){
         		// 新增节点，发起异步请求
         		//parentId:${新增的父节点id},name:${新增节点的名称}
-        		$.post("/rest/content/category/add",{parentId:node.parentId,name:node.text},function(data){
+        		$.post("/content/category/add",{parentId:node.parentId,name:node.text},function(data){
         			//更新树节点信息
         			_tree.tree("update",{
         				//需要更新的节点
@@ -55,7 +55,7 @@ $(function(){
         		//id:${选中树节点的id},name:${选中树节点的名称}
         		$.ajax({
         			   type: "POST",
-        			   url: "/rest/content/category/update",
+        			   url: "/content/category/update",
         			   data: {id:node.id,name:node.text},
         			   success: function(msg){
         				   if(msg == "0"){
@@ -115,7 +115,7 @@ function menuHandler(item){
 				$.ajax({
      			   type: "POST",
      			   //parentId=${节点的父id}&id=${选中节点的id}
-     			   url: "/rest/content/category/delete",
+     			   url: "/content/category/delete",
      			   data : {parentId:node.parentId,id:node.id},
      			   success: function(msg){
      				   //$.messager.alert('提示','新增商品成功!');

@@ -19,7 +19,7 @@ import java.io.IOException;
  * 图片上传控制器
  *
  * @author eliefly
- * @create 2018-01-06 21:59
+ * @date 2018-01-06 21:59
  */
 @Controller
 @RequestMapping("pic/upload")

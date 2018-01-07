@@ -4,8 +4,11 @@ import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.Item;
 
 /**
- * @author eliefly
- */
+* ItemService
+*
+* @author eliefly
+* @date 18/1/7
+*/
 public interface ItemService extends BaseService<Item> {
 
     /**

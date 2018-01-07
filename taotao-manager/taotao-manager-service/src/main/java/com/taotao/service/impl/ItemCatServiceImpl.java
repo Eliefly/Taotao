@@ -6,6 +6,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * ItemCatServiceImpl
+ *
+ * @author eliefly
+ */
 @Service
 public class ItemCatServiceImpl extends BaseServiceImpl<ItemCat> implements ItemCatService {
 
@@ -31,7 +36,5 @@ public class ItemCatServiceImpl extends BaseServiceImpl<ItemCat> implements Item
 
         return itemCatMapper.select(null);
     }*/
-
-
 
 }

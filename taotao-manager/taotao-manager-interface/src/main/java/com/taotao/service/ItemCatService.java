@@ -4,6 +4,12 @@ import com.taotao.common.pojo.ItemCat;
 
 import java.util.List;
 
+/**
+* ItemCatService
+*
+* @author eliefly
+* @date 18/1/7
+*/
 public interface ItemCatService extends BaseService<ItemCat> {
 
     /**

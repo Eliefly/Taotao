@@ -19,4 +19,7 @@
     <dubbo:service interface="com.taotao.service.ItemCatService" ref="itemCatServiceImpl" timeout="100000000"/>
     <dubbo:service interface="com.taotao.service.ItemDescService" ref="itemDescServiceImpl" timeout="100000000"/>
     <dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl" timeout="100000000"/>
+    <dubbo:service interface="com.taotao.service.ContentService" ref="contentServiceImpl" timeout="100000000"/>
+    <dubbo:service interface="com.taotao.service.ContentCategoryService" ref="contentCategoryServiceImpl"
+                   timeout="100000000"/>
 </beans>

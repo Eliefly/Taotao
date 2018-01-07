@@ -1,4 +1,4 @@
-package com.tatao.test;
+package com.tatao.mapper.test;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
