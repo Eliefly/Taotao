@@ -1,6 +1,7 @@
 package com.taotao.service;
 
 import com.taotao.common.pojo.Content;
+import com.taotao.common.pojo.EasyUIDataGridResult;
 
 /**
  * ContentService
@@ -10,4 +11,12 @@ import com.taotao.common.pojo.Content;
  */
 public interface ContentService extends BaseService<Content> {
 
+    /**
+     * 通过内容分类id分页查询内容
+     * @param categoryId 内容id
+     * @param page 当前页码
+     * @param rows 数据条数
+     * @return 数据表格数据
+     */
+    EasyUIDataGridResult queryContentPageByCid(Long categoryId, Integer page, Integer rows);
 }

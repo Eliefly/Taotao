@@ -21,7 +21,7 @@ public class TestController {
     /**
      * 测试
      *
-     * @return
+     * @return 当前时间
      */
     @RequestMapping("/queryNow")
     @ResponseBody

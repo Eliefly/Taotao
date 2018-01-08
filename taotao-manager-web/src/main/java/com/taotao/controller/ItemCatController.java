@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+* 商品类目控制器
+*
+* @author eliefly
+* @date 2018-01-08
+*/
 @RequestMapping("item/cat")
 @Controller
 public class ItemCatController {
@@ -18,23 +24,23 @@ public class ItemCatController {
     /**
      * 商品类目查询
      *
-     * @param page
-     * @param rows
-     * @return
+     * @param page 页码
+     * @param rows  页面显示条数
+     * @return 页面数据
      */
     @RequestMapping("query/{page}")
     @ResponseBody
     public List<ItemCat> queryItemByPage(@PathVariable("page") Integer page, @RequestParam("rows") Integer rows) {
 
-        // return itemCatService.queryItemByPage(page, rows);
+        // 重构: return itemCatService.queryItemByPage(page, rows);
         return itemCatService.queryByPage(page, rows);
     }
 
     /**
      * 通过 ParentId 查找商品类目
      *
-     * @param parentId
-     * @returnCat
+     * @param parentId 父节点id
+     * @return 商品类目信息
      */
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 商品控制器
  *
  * @author ItemController
- * @create 2018-01-06 10:52
+ * @date 2018-01-06 10:52
  */
 @Controller
 @RequestMapping("item")
@@ -25,8 +25,9 @@ public class ItemController {
 
     /**
      * 分页查询商品
-     *
-     * @return
+     * @param page 当前页码
+     * @param rows 数据条数
+     * @return 菜单树数据
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     @ResponseBody
@@ -40,9 +41,9 @@ public class ItemController {
     /**
      * 商品添加
      *
-     * @param item
-     * @param desc
-     * @return
+     * @param item 商品
+     * @param desc 商品描述
+     * @return 是否添加成功
      */
     @RequestMapping(value = "list", method = RequestMethod.POST)
     @ResponseBody

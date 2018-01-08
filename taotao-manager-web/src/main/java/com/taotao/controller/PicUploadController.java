@@ -26,7 +26,7 @@ import java.io.IOException;
 public class PicUploadController {
 
     @Value("${TAOTAO_IMAGE_SERVER_URL}")
-    private String TAOTAO_IMAGE_SERVER_URL;
+    private String taotaoImageServerUrl;
 
     private static String[] TYPE = {".jpg", ".jpeg", ".png", ".bmp", ".gif"};
 
@@ -36,9 +36,9 @@ public class PicUploadController {
     /**
      * 图片上唇
      *
-     * @param uploadFile
-     * @return
-     * @throws Exception
+     * @param uploadFile 上传的图片文件
+     * @return 上传图片的结果数据
+     * @throws Exception 图片读取异常
      */
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
@@ -85,7 +85,7 @@ public class PicUploadController {
             // 使用 FastDFSClient 上传图片
             FastDFSClient client = new FastDFSClient("classpath:resource/fastdsf_conf.conf");
             String str = client.uploadFile(uploadFile.getBytes(), extName);
-            String url = TAOTAO_IMAGE_SERVER_URL + str;
+            String url = taotaoImageServerUrl + str;
             picUploadResult.setUrl(url);
             picUploadResult.setError(0);
         }

@@ -1,6 +1,7 @@
 package com.taotao.controller;
 
 import com.taotao.common.pojo.ContentCategory;
+import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.service.ContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,9 @@ public class ContentCategoryController {
 
     /**
      * 删除内容分类
+     *
      * @param parentId 父id
-     * @param id 自身id
+     * @param id       自身id
      * @return 删除是否成功
      */
     @RequestMapping(value = "delete", method = RequestMethod.POST)

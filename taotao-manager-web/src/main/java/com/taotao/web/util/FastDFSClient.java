@@ -14,7 +14,7 @@ public class FastDFSClient {
     private StorageServer storageServer = null;
     private StorageClient1 storageClient = null;
 
-    //参数就是配置文件的路径
+    // 参数就是配置文件的路径
     public FastDFSClient(String conf) throws Exception {
         if (conf.contains("classpath:")) {
             conf = conf.replace("classpath:", this.getClass().getResource("/").getPath());
