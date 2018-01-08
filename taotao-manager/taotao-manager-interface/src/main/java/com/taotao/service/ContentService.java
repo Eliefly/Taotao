@@ -19,4 +19,11 @@ public interface ContentService extends BaseService<Content> {
      * @return 数据表格数据
      */
     EasyUIDataGridResult queryContentPageByCid(Long categoryId, Integer page, Integer rows);
+
+    /**
+     * 根据内容id查询内容
+     * @param categoryId 内容id
+     * @return 结果字符串
+     */
+    String queryContentByCid(Long categoryId);
 }
