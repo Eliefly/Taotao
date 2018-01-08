@@ -8,18 +8,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 门户首页
  *
  * @author eliefly
- * @create 2018-01-07 16:32
+ * @date 2018-01-07
  */
 @Controller
-@RequestMapping("index")
 public class IndexController {
 
     /**
      * 显示首页
      *
-     * @return
+     * @return 跳转到首页
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "index", method = RequestMethod.GET)
     public String toIndex() {
 
         return "index";
