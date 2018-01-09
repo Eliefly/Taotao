@@ -4,7 +4,11 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.Content;
 import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.util.JsonUtils;
+import com.taotao.redis.impl.JedisClientCluster;
 import com.taotao.service.ContentService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +24,12 @@ import java.util.Map;
  */
 @Service
 public class ContentServiceImpl extends BaseServiceImpl<Content> implements ContentService {
+
+    @Autowired
+    private JedisClientCluster jedisClientCluster;
+
+    @Value("${TAOTAO_PORTAL_BIG_AD}")
+    private String taotaoPortalBigAd;
 
     @Override
     public EasyUIDataGridResult queryContentPageByCid(Long categoryId, Integer page, Integer rows) {
@@ -38,6 +48,21 @@ public class ContentServiceImpl extends BaseServiceImpl<Content> implements Cont
     @Override
     public String queryContentByCid(Long categoryId) {
 
+        /*
+         * 首页大广告, 访问频率高, 更新频率低, 在服务层和持久层加了redis集群缓存.
+         * 先从redis查询数据，如果redis没有数据，再去MySQL查询.
+         */
+        // 1.先从redis查询数据
+        try {
+            String redisJson = jedisClientCluster.get(taotaoPortalBigAd);
+            if (StringUtils.isNotBlank(redisJson)) {
+                return redisJson;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 2.redis中没有, 从MySql数据库查询
         Content param = new Content();
         param.setCategoryId(categoryId);
 
@@ -59,6 +84,12 @@ public class ContentServiceImpl extends BaseServiceImpl<Content> implements Cont
             results.add(map);
         }
 
-        return JsonUtils.objectToJson(results);
+        // JsonUtils的工具类，可以把对象转json格式的数据
+        String jsonResult = JsonUtils.objectToJson(results);
+
+        // 把数据存放到redis
+        jedisClientCluster.set(taotaoPortalBigAd, jsonResult, 60 * 60 * 24);
+
+        return jsonResult;
     }
 }

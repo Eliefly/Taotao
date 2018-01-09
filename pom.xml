@@ -12,6 +12,7 @@
         <module>taotao-manager-web</module>
         <module>itcast-mybatis</module>
         <module>taotao-portal-web</module>
+        <module>itcast-jedis</module>
     </modules>
 
     <name>Maven</name>
