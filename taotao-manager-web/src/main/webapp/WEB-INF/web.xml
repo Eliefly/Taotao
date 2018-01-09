@@ -26,6 +26,26 @@
         <!-- restful格式的 -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <!--解决PUT和DELETE请求是无法提交表单数据-->
+    <filter>
+        <filter-name>HttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HttpMethodFilter</filter-name>
+        <!--servlet为springMvc的servlet名 -->
+        <servlet-name>springmvc</servlet-name>
+    </filter-mapping>
+    <!--将POST请求转化为DELETE或者是PUT
+    要用_method指定真正的请求参数 -->
+    <!--<filter>-->
+    <!--<filter-name>HiddenHttpMethodFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>HiddenHttpMethodFilter</filter-name>-->
+    <!--<servlet-name>springmvc</servlet-name>-->
+    <!--</filter-mapping>-->
     <!-- POST乱码过滤器 -->
     <filter>
         <filter-name>characterEncoding</filter-name>
