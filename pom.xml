@@ -13,6 +13,8 @@
         <module>itcast-mybatis</module>
         <module>taotao-portal-web</module>
         <module>itcast-jedis</module>
+        <module>itcast-httpclient</module>
+        <module>taotao-sso</module>
     </modules>
 
     <name>Maven</name>

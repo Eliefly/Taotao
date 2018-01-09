@@ -45,7 +45,7 @@ public class ItemController {
      * @param desc 商品描述
      * @return 是否添加成功
      */
-    @RequestMapping(value = "list", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public String save(Item item, String desc) {
 
