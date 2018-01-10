@@ -29,7 +29,7 @@
 
     <!-- 切面 -->
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.eliefly.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.taotao.manager.service.*.*(..))" />
     </aop:config>
 
 </beans>

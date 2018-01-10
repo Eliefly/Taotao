@@ -1,9 +1,7 @@
 package com.taotao.mapper;
 
 import com.github.abel533.mapper.Mapper;
-import com.taotao.common.pojo.ContentCategory;
-
-import java.util.List;
+import com.taotao.pojo.ContentCategory;
 
 /**
  * ContentCategoryMapper

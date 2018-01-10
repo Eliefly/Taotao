@@ -1,8 +1,7 @@
 package com.taotao.controller;
 
-import com.taotao.common.pojo.ContentCategory;
-import com.taotao.common.pojo.EasyUIDataGridResult;
-import com.taotao.service.ContentCategoryService;
+import com.taotao.pojo.ContentCategory;
+import com.taotao.manager.service.ContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

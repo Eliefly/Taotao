@@ -1,7 +1,7 @@
 package com.taotao.mapper;
 
 import com.github.abel533.mapper.Mapper;
-import com.taotao.common.pojo.ItemCat;
+import com.taotao.pojo.ItemCat;
 
 /**
  * ItemCatMapper

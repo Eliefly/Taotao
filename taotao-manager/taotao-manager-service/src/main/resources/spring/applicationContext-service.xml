@@ -8,18 +8,19 @@
     http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 组件扫描 -->
-    <context:component-scan base-package="com.taotao.service"></context:component-scan>
+    <context:component-scan base-package="com.taotao.manager.service"></context:component-scan>
     <!-- 发布服务 -->
     <dubbo:registry address="192.168.56.101:2181" protocol="zookeeper"></dubbo:registry>
     <!-- 名字是随意的，最好名字要唯一 -->
     <dubbo:application name="taotao-manager"/>
     <!-- port:指的是本地服务暴露的端口 -->
     <dubbo:protocol name="dubbo" port="20880"/>
-    <dubbo:service interface="com.taotao.service.TestService" ref="testServiceImpl" timeout="100000000"/>
-    <dubbo:service interface="com.taotao.service.ItemCatService" ref="itemCatServiceImpl" timeout="100000000"/>
-    <dubbo:service interface="com.taotao.service.ItemDescService" ref="itemDescServiceImpl" timeout="100000000"/>
-    <dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl" timeout="100000000"/>
-    <dubbo:service interface="com.taotao.service.ContentService" ref="contentServiceImpl" timeout="100000000"/>
-    <dubbo:service interface="com.taotao.service.ContentCategoryService" ref="contentCategoryServiceImpl"
+    <dubbo:service interface="com.taotao.manager.service.TestService" ref="testServiceImpl" timeout="100000000"/>
+    <dubbo:service interface="com.taotao.manager.service.ItemCatService" ref="itemCatServiceImpl" timeout="100000000"/>
+    <dubbo:service interface="com.taotao.manager.service.ItemDescService" ref="itemDescServiceImpl"
+                   timeout="100000000"/>
+    <dubbo:service interface="com.taotao.manager.service.ItemService" ref="itemServiceImpl" timeout="100000000"/>
+    <dubbo:service interface="com.taotao.manager.service.ContentService" ref="contentServiceImpl" timeout="100000000"/>
+    <dubbo:service interface="com.taotao.manager.service.ContentCategoryService" ref="contentCategoryServiceImpl"
                    timeout="100000000"/>
 </beans>

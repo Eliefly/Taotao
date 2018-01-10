@@ -1,14 +1,11 @@
 package com.tatao.mapper.test;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.taotao.common.pojo.Item;
 import com.taotao.mapper.ItemCatMapper;
-import com.taotao.common.pojo.ItemCat;
-import com.taotao.mapper.ItemMapper;
-import com.taotao.service.ItemCatService;
-import com.taotao.service.ItemService;
-import com.taotao.service.TestService;
+import com.taotao.pojo.ItemCat;
+import com.taotao.manager.service.ItemCatService;
+import com.taotao.manager.service.ItemService;
+import com.taotao.manager.service.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

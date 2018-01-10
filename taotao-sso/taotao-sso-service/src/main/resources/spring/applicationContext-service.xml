@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 组件扫描 -->
+    <context:component-scan base-package="com.taotao.sso.service"></context:component-scan>
+    <!-- 发布服务 -->
+    <dubbo:registry address="192.168.56.101:2181" protocol="zookeeper"></dubbo:registry>
+    <!-- 名字是随意的，最好名字要唯一 -->
+    <dubbo:application name="taotao-manager"/>
+    <!-- port:指的是本地服务暴露的端口 使用200881端口-->
+    <dubbo:protocol name="dubbo" port="20881"/>
+    <!--声明要暴露的服务接口-->
+    <dubbo:service interface="com.taotao.sso.service.UserService" ref="userServiceImpl" timeout="100000000"/>
+
+</beans>

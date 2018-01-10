@@ -15,6 +15,7 @@
         <module>itcast-jedis</module>
         <module>itcast-httpclient</module>
         <module>taotao-sso</module>
+        <module>taotao-sso-web</module>
     </modules>
 
     <name>Maven</name>

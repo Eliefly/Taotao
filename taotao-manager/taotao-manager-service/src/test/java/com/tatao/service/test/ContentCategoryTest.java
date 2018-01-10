@@ -1,6 +1,6 @@
 package com.tatao.service.test;
 
-import com.taotao.service.ContentCategoryService;
+import com.taotao.manager.service.ContentCategoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,7 +14,7 @@
     <!--<constructor-arg name="port" value="${redis.port}"/>-->
     <!--</bean>-->
     <!-- 配置操作单机版redis的实现类 -->
-    <!--<bean id="jedisClientPool" class="com.taotao.redis.impl.JedisClientPool"/>-->
+    <!--<bean id="jedisClientPool" class="com.taotao.managerager.redis.impl.JedisClientPool"/>-->
 
     <!-- 配置JedisCluster -->
     <context:property-placeholder location="classpath:resource/redis.properties" ignore-unresolvable="true"/>
