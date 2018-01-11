@@ -79,6 +79,7 @@
         <activemq.version>5.13.0</activemq.version>
         <freemarker.version>2.3.23</freemarker.version>
         <quartz.version>2.2.2</quartz.version>
+        <json-lib.version>2.4</json-lib.version>
     </properties>
 
     <!-- 作用就是：只是版本的控制管理 -->
@@ -280,6 +281,13 @@
                 <groupId>org.freemarker</groupId>
                 <artifactId>freemarker</artifactId>
                 <version>${freemarker.version}</version>
+            </dependency>
+            <!--使用net.sf.json-->
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <version>${json-lib.version}</version>
+                <classifier>jdk15</classifier>
             </dependency>
         </dependencies>
     </dependencyManagement>

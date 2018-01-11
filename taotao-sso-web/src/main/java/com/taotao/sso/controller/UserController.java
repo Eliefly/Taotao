@@ -1,5 +1,6 @@
 package com.taotao.sso.controller;
 
+import com.taotao.common.util.JsonLibUtils;
 import com.taotao.common.util.JsonUtils;
 import com.taotao.pojo.User;
 import com.taotao.sso.service.UserService;
@@ -11,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.security.auth.callback.Callback;
 
 /**
  * UserController
@@ -85,12 +84,14 @@ public class UserController {
             User user = userService.queryUserByTicker(ticket);
 
             if (user != null) {
+                // user 对象转成 JSON文本, 并排除无用的字段.
+                String userJson = JsonLibUtils.toJSONString(user, new String[]{"password", "updated", "created"});
 
                 String resultStr;
                 if (StringUtils.isNotBlank(callback)) {
-                    resultStr = callback + "(" + JsonUtils.objectToJson(user) + ")";
+                    resultStr = callback + "(" + userJson + ")";
                 } else {
-                    resultStr = JsonUtils.objectToJson(user);
+                    resultStr = userJson;
                 }
 
                 return ResponseEntity.ok(resultStr);
