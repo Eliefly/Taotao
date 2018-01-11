@@ -1,5 +1,6 @@
 package com.taotao.sso.controller;
 
+import com.taotao.common.util.JsonUtils;
 import com.taotao.pojo.User;
 import com.taotao.sso.service.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -77,13 +78,22 @@ public class UserController {
      * @return 响应数据, 如果查询到用户, 则封装用户数据
      */
     @RequestMapping(value = "{ticket}", method = RequestMethod.GET)
-    public ResponseEntity<User> queryUserByTicker(@PathVariable(value = "ticket") String ticket) {
+    public ResponseEntity<String> queryUserByTicker(@PathVariable(value = "ticket") String ticket,
+                                                    String callback) {
 
         try {
             User user = userService.queryUserByTicker(ticket);
 
             if (user != null) {
-                return ResponseEntity.ok(user);
+
+                String resultStr;
+                if (StringUtils.isNotBlank(callback)) {
+                    resultStr = callback + "(" + JsonUtils.objectToJson(user) + ")";
+                } else {
+                    resultStr = JsonUtils.objectToJson(user);
+                }
+
+                return ResponseEntity.ok(resultStr);
             } else {
                 // 404 	请求失败，请求所希望得到的资源未被在服务器上发现。
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

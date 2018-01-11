@@ -29,6 +29,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * cookies中存放ticket的cookiename, 通过此cookiename可从cookies中取出ticket
+     */
     @Value("${COOKIE_NAME}")
     private String cookieName;
 
