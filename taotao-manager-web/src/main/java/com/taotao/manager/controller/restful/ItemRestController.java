@@ -1,4 +1,4 @@
-package com.taotao.controller.restful;
+package com.taotao.manager.controller.restful;
 
 import com.taotao.pojo.Item;
 import com.taotao.manager.service.ItemService;

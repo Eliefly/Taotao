@@ -1,6 +1,6 @@
 package com.taotao.fastdfs.test;
 
-import com.taotao.web.util.FastDFSClient;
+import com.taotao.manager.controller.web.util.FastDFSClient;
 import org.csource.fastdfs.*;
 import org.junit.Test;
 

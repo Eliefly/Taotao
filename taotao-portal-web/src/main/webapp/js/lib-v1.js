@@ -1130,7 +1130,7 @@ var jdModelCallCenter = {settings: {clstag1: 0,clstag2: 0},tbClose: function() {
         }, 20)
     },init: function() {
 //        var a = this;
-//        $.ajax({url: ("https:" == document.location.protocol ? "https://" : "http://") + "passport." + pageConfig.FN_getDomain() + "/new/helloService.ashx?m=ls&sso=0",dataType: "jsonp",success: function(b) {
+//        $.ajax({url: ("https:" == document.location.protocol ? "https://" : "http://") + "passport." + pageConfig.FN_getDomain() + "/new/helloService.ashx?m=ls&manager=0",dataType: "jsonp",success: function(b) {
 //                a.tbClose(), b && b.info && $("#loginbar").html(b.info), a.settings.fn()
 //            }})
     }};
@@ -1353,7 +1353,7 @@ var category = {OBJ: $("#_JD_ALLSORT"),
     		
 //    		$.ajax({url: ("https:" == document.location.protocol ? "https://" : "http://") + "passport." + pageConfig.FN_getDomain() + "/new/helloService.ashx?m=ls",
 //    			dataType: "jsonp",scriptCharset: "gb2312",success: function(a) {
-//            a && a.info && $("#loginbar").html(a.info), a && a.sso && $.each(a.sso, function() {
+//            a && a.info && $("#loginbar").html(a.info), a && a.manager && $.each(a.manager, function() {
 //                $.getJSON(this);
 //                
 //            })

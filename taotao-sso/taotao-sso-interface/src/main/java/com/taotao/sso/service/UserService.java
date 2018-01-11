@@ -26,5 +26,19 @@ public interface UserService {
      * @return 查询的用户数据
      */
     User queryUserByTicker(String ticket);
+
+    /**
+     * 注册用户
+     *
+     * @param user 用户参数
+     */
+    void doRegister(User user);
+
+    /**
+     * 用户登录
+     * @param user 用户参数
+     * @return 是否已登录的标识
+     */
+    String doLogin(User user);
 }
 

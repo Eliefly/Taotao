@@ -5,10 +5,13 @@ import com.taotao.mapper.UserMapper;
 import com.taotao.pojo.User;
 import com.taotao.redis.impl.JedisClientCluster;
 import com.taotao.sso.service.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * UserServiceImpl
@@ -25,8 +28,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JedisClientCluster jedisClientCluster;
 
-    @Value("${SSO_TICKET_KEY}")
-    private String ssoTicketKey;
+    @Value("${SSO_TAOTAO_TICKET_KEY}")
+    private String ssoTaoTaoTicketKey;
+
+    @Value("${SSO_TAOTAO_TICKET_INCR}")
+    private String ssoTaotaoTicketIncr;
 
     @Override
     public Boolean check(String param, Integer type) {
@@ -61,7 +67,7 @@ public class UserServiceImpl implements UserService {
 
         User user = null;
 
-        String key = ssoTicketKey + ticket;
+        String key = ssoTaoTaoTicketKey + ticket;
 
         String jsonStr = jedisClientCluster.get(key);
 
@@ -76,5 +82,43 @@ public class UserServiceImpl implements UserService {
         }
 
         return user;
+    }
+
+    @Override
+    public void doRegister(User user) {
+
+        user.setCreated(new Date());
+        user.setUpdated(user.getCreated());
+
+        // 需要给用户密码进行加密，保证密码安全，我们使用MD5加密
+        user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+        // 保存用户
+        userMapper.insert(user);
+
+    }
+
+    @Override
+    public String doLogin(User user) {
+
+        user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+        User loginUser = userMapper.selectOne(user);
+
+        try {
+            if (loginUser != null) {
+
+                // 生成唯一数ticket,可是使用redis的唯一数+用户id
+                String ticket = "" + jedisClientCluster.incr(ssoTaotaoTicketIncr) + loginUser.getId();
+
+                // 把ticket和用户数据放到redis中,模拟session，原来的session有效时间是半小时
+                jedisClientCluster.set(ssoTaoTaoTicketKey + ticket, JsonUtils.objectToJson(loginUser), 60 * 30);
+
+                return ticket;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 如果查询用户为空
+        return null;
     }
 }

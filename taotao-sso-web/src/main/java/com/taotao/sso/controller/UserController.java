@@ -2,6 +2,7 @@ package com.taotao.sso.controller;
 
 import com.taotao.pojo.User;
 import com.taotao.sso.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.security.auth.callback.Callback;
 
 /**
  * UserController
@@ -31,8 +34,9 @@ public class UserController {
      * @return true：数据可用，false：数据不可用
      */
     @RequestMapping(value = "check/{param}/{type}", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> check(@PathVariable(value = "param") String param,
-                                         @PathVariable(value = "type") Integer type) {
+    public ResponseEntity<String> check(@PathVariable(value = "param") String param,
+                                        @PathVariable(value = "type") Integer type,
+                                        String callback) {
         final Integer minType = 1;
         final Integer maxType = 3;
 
@@ -43,8 +47,20 @@ public class UserController {
 
         try {
             Boolean result = userService.check(param, type);
+
+            String resultStr = "";
+
+            // 如果传入callback参数, 说明要使用 jsonp (跨域获取json格式数据)
+            if (StringUtils.isNotBlank(callback)) {
+
+                resultStr = callback + "(" + result + ")";
+
+            } else {
+                resultStr += result;
+            }
+
             // 200
-            return ResponseEntity.ok(result);
+            return ResponseEntity.ok(resultStr);
         } catch (Exception e) {
             e.printStackTrace();
         }

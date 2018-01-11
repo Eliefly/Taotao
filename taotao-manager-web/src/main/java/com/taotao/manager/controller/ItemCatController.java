@@ -1,4 +1,4 @@
-package com.taotao.controller;
+package com.taotao.manager.controller;
 
 import com.taotao.pojo.ItemCat;
 import com.taotao.manager.service.ItemCatService;

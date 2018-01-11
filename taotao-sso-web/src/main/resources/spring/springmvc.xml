@@ -30,7 +30,7 @@
 
     <!-- 引入dubbo服务 -->
     <dubbo:registry address="192.168.56.101:2181" protocol="zookeeper"></dubbo:registry>
-    <dubbo:application name="taotao-manager-web"/>
+    <dubbo:application name="taotao-sso-web"/>
     <dubbo:reference interface="com.taotao.sso.service.UserService" id="userService"
                      timeout="100000000"></dubbo:reference>
 

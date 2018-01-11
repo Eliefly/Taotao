@@ -1,4 +1,4 @@
-package com.taotao.controller;
+package com.taotao.manager.controller;
 
 import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.pojo.Item;

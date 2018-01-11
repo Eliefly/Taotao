@@ -1,8 +1,8 @@
-package com.taotao.controller;
+package com.taotao.manager.controller;
 
 import com.taotao.common.pojo.PicUploadResult;
 import com.taotao.common.util.JsonUtils;
-import com.taotao.web.util.FastDFSClient;
+import com.taotao.manager.controller.web.util.FastDFSClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
