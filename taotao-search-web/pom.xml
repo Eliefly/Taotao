@@ -6,9 +6,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>taotao-sso-web</artifactId>
+    <artifactId>taotao-search-web</artifactId>
     <packaging>war</packaging>
-    <name>taotao-sso-web Maven Webapp</name>
+    <name>taotao-search-web Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
@@ -17,9 +17,10 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- 加入taotao-search-interface依赖 -->
         <dependency>
             <groupId>com.taotao</groupId>
-            <artifactId>taotao-sso-interface</artifactId>
+            <artifactId>taotao-search-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- Spring -->
@@ -92,6 +93,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>taotao-sso-web</finalName>
+        <finalName>taotao-search-web</finalName>
     </build>
 </project>

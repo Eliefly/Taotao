@@ -1,7 +1,6 @@
 package com.taotao.sso.controller;
 
 import com.taotao.common.util.JsonLibUtils;
-import com.taotao.common.util.JsonUtils;
 import com.taotao.pojo.User;
 import com.taotao.sso.service.UserService;
 import org.apache.commons.lang3.StringUtils;

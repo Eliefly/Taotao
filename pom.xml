@@ -16,6 +16,9 @@
         <module>itcast-httpclient</module>
         <module>taotao-sso</module>
         <module>taotao-sso-web</module>
+        <module>itcast-solrj</module>
+        <module>taotao-search</module>
+        <module>taotao-search-web</module>
     </modules>
 
     <name>Maven</name>
