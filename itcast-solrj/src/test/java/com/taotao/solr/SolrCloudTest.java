@@ -49,10 +49,10 @@ public class SolrCloudTest {
     @Test
     public void testDeleteIndex() throws Exception {
         // 根据id删除索引数据
-        // this.httpSolrServer.deleteById("c1001");
+        this.cloudSolrServer.deleteById("c1001");
 
         // 根据条件删除（如果是*:*就表示全部删除，慎用）
-        this.cloudSolrServer.deleteByQuery("*:*");
+        // this.cloudSolrServer.deleteByQuery("*:*");
 
         // 提交
         this.cloudSolrServer.commit();

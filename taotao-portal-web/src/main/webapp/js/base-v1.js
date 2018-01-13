@@ -37,7 +37,7 @@ function addToFavorite() {
 }
 
 function search(a) {
-    var b = "http://search.taotao.com/search.html?q=" + encodeURIComponent(document.getElementById(a).value);
+    var b = "http://search.taotao.com/search?q=" + encodeURIComponent(document.getElementById(a).value);
     return window.location.href = b;
 }
 

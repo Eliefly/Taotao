@@ -8,13 +8,16 @@ package com.taotao.common.pojo;
  */
 public class PicUploadResult {
 
-    private Integer error;// 0上传成功，1代表上传失败
+    /**
+     * 0上传成功，1代表上传失败
+     */
+    private Integer error;
 
-    private String width;// 图片的宽
+    private String width;
 
-    private String height;// 图片的高
+    private String height;
 
-    private String url;// 图片的上传地址
+    private String url;
 
     public Integer getError() {
         return error;

@@ -1,11 +1,16 @@
 package com.taotao.pojo;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.persistence.*;
 import java.text.DecimalFormat;
 
 /**
- * 商品信息数据模型
- */
+* 商品信息数据模型
+*
+* @author eliefly
+* @date 18/1/13
+*/
 @Table(name = "tb_item")
 public class Item extends BasePojo {
 
@@ -36,6 +41,19 @@ public class Item extends BasePojo {
 
     @Column
     private Integer status;
+
+    /**
+     * 支持前端页面显示, 增加getImages方法
+     *
+     * @return 图片路径
+     */
+    public String[] getImages() {
+
+        if (StringUtils.isNotBlank(getImage())) {
+            return StringUtils.split(getImage(), ",");
+        }
+        return null;
+    }
 
     public Long getId() {
         return id;

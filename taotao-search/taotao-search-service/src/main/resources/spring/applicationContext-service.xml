@@ -17,5 +17,5 @@
     <!-- port:指的是本地服务暴露的端口 使用200881端口-->
     <dubbo:protocol name="dubbo" port="20882"/>
     <!--声明要暴露的服务接口-->
-    <!--<dubbo:service interface="com.taotao.sso.service.UserService" ref="userServiceImpl" timeout="100000000"/>-->
+    <dubbo:service interface="com.taotao.search.service.SearchService" ref="searchServiceImpl" timeout="100000000"/>
 </beans>

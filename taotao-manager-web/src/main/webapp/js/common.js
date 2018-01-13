@@ -23,7 +23,7 @@ var TT = TAOTAO = {
 	// 编辑器参数
 	kingEditorParams : {
 		filePostName  : "uploadFile",
-		uploadJson : '/rest/pic/upload',
+		uploadJson : '/pic/upload',
 		dir : "image"
 	},
 	// 格式化时间
@@ -114,7 +114,7 @@ var TT = TAOTAO = {
     	$(".selectItemCat").each(function(i,e){
     		var _ele = $(e);
     		if(data && data.cid){
-				$.getJSON('/rest/item/cat/'+data.cid,function(_data){
+				$.getJSON('/item/cat/'+data.cid,function(_data){
        				_ele.after("<span style='margin-left:10px;'>"+_data.name+"</span>");
        			});
     		}else{
@@ -132,7 +132,7 @@ var TT = TAOTAO = {
     			    onOpen : function(){
     			    	var _win = this;
     			    	$("ul",_win).tree({
-    			    		url:'/rest/item/cat',
+    			    		url:'/item/cat',
     			    		method:'GET',
     			    		animate:true,
     			    		onClick : function(node){
