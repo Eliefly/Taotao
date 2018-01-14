@@ -20,6 +20,8 @@
         <module>taotao-search</module>
         <module>taotao-search-web</module>
         <module>itcast-activemq</module>
+        <module>taotao-item-web</module>
+        <module>itcast-freemarker</module>
     </modules>
 
     <name>Maven</name>

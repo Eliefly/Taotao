@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+${world}
+
+<br/>
+
+${person.id}
+${person.name}
+
+
+<#list persons as person>
+	${person}
+</#list>
+
+<#list mx?keys as k>
+	${mx[k]}
+</#list>
+
+${mx.fbb}
+${mx.lbb} 
+
+<#list maps as map >
+	<#list map?keys as key>
+		${map[key]}
+	</#list>
+</#list>
+
+
+<#list maps as map >
+	${map.id1}/${map.id2}
+</#list>
+
+${val!}
+
+</body>
+</html>

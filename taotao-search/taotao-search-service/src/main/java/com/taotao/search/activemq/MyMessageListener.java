@@ -36,6 +36,9 @@ public class MyMessageListener implements MessageListener {
             TextMessage textMessage = (TextMessage) message;
 
             try {
+
+                String typeSave = "save";
+
                 String msg = textMessage.getText();
 
                 if (StringUtils.isNotBlank(msg)) {
@@ -45,10 +48,11 @@ public class MyMessageListener implements MessageListener {
                     String type = jsonNode.get("type").asText();
                     Long itemId = jsonNode.get("itemId").asLong();
 
-                    System.out.println("type: " + type);
-                    System.out.println("itemId: " + itemId);
-
-                    searchService.saveItem(itemId);
+                    // System.out.println("type: " + type);
+                    // System.out.println("itemId: " + itemId);
+                    if (typeSave.equals(type)) {
+                        searchService.saveItem(itemId);
+                    }
                 }
 
             } catch (Exception e) {

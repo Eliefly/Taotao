@@ -103,7 +103,9 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public void saveItem(Long itemId) {
+
         Item item = itemMapper.selectByPrimaryKey(itemId);
+        System.out.println(item);
 
         // 创建SolrInputDocument对象，调用add方法构建文档内容
         SolrInputDocument document = new SolrInputDocument();
