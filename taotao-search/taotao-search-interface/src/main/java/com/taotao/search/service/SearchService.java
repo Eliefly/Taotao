@@ -20,4 +20,11 @@ public interface SearchService {
      * @return
      */
     PageBean<Item> search(String query, Integer page, Integer pageNums);
+
+    /**
+     * 更新新增商品索引
+     *
+     * @param itemId 商品id
+     */
+    void saveItem(Long itemId);
 }

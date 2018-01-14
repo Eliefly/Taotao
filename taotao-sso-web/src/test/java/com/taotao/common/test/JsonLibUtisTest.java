@@ -1,12 +1,14 @@
 package com.taotao.common.test;
 
 import com.taotao.common.util.JsonLibUtils;
+import com.taotao.common.util.JsonUtils;
 import com.taotao.pojo.User;
 import org.junit.Test;
 
 import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * JsonLibUtisTest
@@ -16,6 +18,9 @@ import java.util.Date;
  */
 public class JsonLibUtisTest {
 
+    /**
+     * object
+     */
     @Test
     public void test01() {
 
@@ -33,6 +38,9 @@ public class JsonLibUtisTest {
         System.out.println(jsonStr);
     }
 
+    /**
+     * list
+     */
     @Test
     public void test02() {
 
@@ -61,6 +69,41 @@ public class JsonLibUtisTest {
         String jsonStr = JsonLibUtils.toJSONString(users, new String[]{"created", "updated"});
 
         System.out.println(jsonStr);
+    }
+
+    /**
+     * map --> jsonStr
+     */
+    @Test
+    public void test03() {
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("name", "张三");
+        map.put("age", 30);
+        map.put("city", "深圳");
+
+        String json = JsonLibUtils.toJSONString(map, new String[]{"city"});
+
+        System.out.println(json);
+
+    }
+
+    @Test
+    public void test04() {
+
+        String str = "{\"id\":1,\"username\":\"\",\"email\":\"\",\"created\":{\"time\":1515851024726,\"minutes\":43," +
+                "\"seconds\":44,\"hours\":21,\"month\":0,\"year\":118,\"timezoneOffset\":-480,\"day\":6,\"date\":13}," +
+                "\"password\":\"123456\"}";
+
+//        HashMap map = JsonLibUtils.toHashMap(str);
+        User user = JsonLibUtils.toBean(str, User.class);
+//
+//        System.out.println(map);
+//        System.out.println(map.get("id"));
+
+        System.out.println(user);
+
     }
 
 }

@@ -1,6 +1,7 @@
 package com.taotao.search.service.impl;
 
 import com.taotao.common.pojo.PageBean;
+import com.taotao.mapper.ItemMapper;
 import com.taotao.pojo.Item;
 import com.taotao.search.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
@@ -10,6 +11,7 @@ import org.apache.solr.client.solrj.impl.CloudSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,9 @@ public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private CloudSolrServer cloudSolrServer;
+
+    @Autowired
+    private ItemMapper itemMapper;
 
     @Override
     public PageBean<Item> search(String query, Integer page, Integer pageNums) {
@@ -95,4 +100,28 @@ public class SearchServiceImpl implements SearchService {
 
         return pageBean;
     }
+
+    @Override
+    public void saveItem(Long itemId) {
+        Item item = itemMapper.selectByPrimaryKey(itemId);
+
+        // 创建SolrInputDocument对象，调用add方法构建文档内容
+        SolrInputDocument document = new SolrInputDocument();
+
+        document.setField("id", item.getId().toString());
+        document.setField("item_title", item.getTitle());
+        document.setField("item_price", item.getPrice());
+        document.setField("item_image", item.getImage());
+        document.setField("item_cid", item.getCid());
+        document.setField("item_status", item.getStatus());
+
+        try {
+            // 保存到索引库中
+            this.cloudSolrServer.add(document);
+            this.cloudSolrServer.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

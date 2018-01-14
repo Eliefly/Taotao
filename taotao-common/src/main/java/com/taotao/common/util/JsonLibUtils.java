@@ -7,7 +7,7 @@ import net.sf.json.JsonConfig;
 import java.util.*;
 
 /**
- * JsonLibUtils
+ * JsonLib工具类
  *
  * @author eliefly
  * @date 2018-01-12
@@ -16,7 +16,7 @@ import java.util.*;
 public class JsonLibUtils {
 
     /**
-     * 将List对象序列化为JSON文本
+     * 将List对象序列化为json数组串
      *
      * @param list     list数据
      * @param excludes 忽略的字段. 为null时不忽略任何字段.
@@ -35,7 +35,7 @@ public class JsonLibUtils {
     }
 
     /**
-     * 将对象序列化为JSON文本
+     * 将对象序列化为json串
      *
      * @param object   被转化的对象
      * @param excludes 忽略的字段
@@ -47,29 +47,49 @@ public class JsonLibUtils {
 
         jsonConfig.setExcludes(excludes);
 
-        JSONArray jsonArray = JSONArray.fromObject(object, jsonConfig);
+        JSONObject jsonObject = JSONObject.fromObject(object, jsonConfig);
 
-        return jsonArray.toString();
-    }
-
-    /**
-     * 将JSON对象数组序列化为JSON文本
-     *
-     * @param jsonArray JSON对象数组
-     * @return JSON文本
-     */
-    public static String toJSONString(JSONArray jsonArray) {
-        return jsonArray.toString();
-    }
-
-    /**
-     * 将JSON对象序列化为JSON文本
-     *
-     * @param jsonObject JSON对象
-     * @return JSON文本
-     */
-    public static String toJSONString(JSONObject jsonObject) {
         return jsonObject.toString();
+    }
+
+    /**
+     * 将对象转换为JSON对象数组
+     *
+     * @param object Object对象
+     * @return JSON数组对象
+     */
+    public static JSONArray toJSONArray(Object object) {
+
+        return JSONArray.fromObject(object);
+    }
+
+    /**
+     * 将对象转换为JSON对象
+     *
+     * @param object Object对象
+     * @return JSON对象
+     */
+    public static JSONObject toJSONObject(Object object) {
+
+        return JSONObject.fromObject(object);
+    }
+
+    /***
+     * 将对象转换为 HashMap
+     * @param object 传入对象
+     * @return HashMap对象
+     */
+    public static HashMap toHashMap(Object object) {
+        HashMap<String, Object> data = new HashMap<String, Object>();
+        JSONObject jsonObject = JsonLibUtils.toJSONObject(object);
+        Iterator it = jsonObject.keys();
+        while (it.hasNext()) {
+            String key = String.valueOf(it.next());
+            Object value = jsonObject.get(key);
+            data.put(key, value);
+        }
+
+        return data;
     }
 
     /***
@@ -109,47 +129,10 @@ public class JsonLibUtils {
     }
 
     /***
-     * 将对象转换为JSON对象数组
-     * @param object
-     * @return
-     */
-    public static JSONArray toJSONArray(Object object) {
-        return JSONArray.fromObject(object);
-    }
-
-    /***
-     * 将对象转换为JSON对象
-     * @param object
-     * @return
-     */
-    public static JSONObject toJSONObject(Object object) {
-        return JSONObject.fromObject(object);
-    }
-
-    /***
-     * 将对象转换为HashMap
-     * @param object
-     * @return
-     */
-    public static HashMap toHashMap(Object object) {
-        HashMap<String, Object> data = new HashMap<String, Object>();
-        JSONObject jsonObject = JsonLibUtils.toJSONObject(object);
-        Iterator it = jsonObject.keys();
-        while (it.hasNext()) {
-            String key = String.valueOf(it.next());
-            Object value = jsonObject.get(key);
-            data.put(key, value);
-        }
-
-        return data;
-    }
-
-    /***
      * 将对象转换为List>
      * @param object
      * @return
      */
-    // 返回非实体类型(Map)的List
     public static List<Map<String, Object>> toList(Object object) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         JSONArray jsonArray = JSONArray.fromObject(object);
