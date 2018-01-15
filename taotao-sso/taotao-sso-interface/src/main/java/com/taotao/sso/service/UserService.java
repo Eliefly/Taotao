@@ -36,6 +36,7 @@ public interface UserService {
 
     /**
      * 用户登录
+     *
      * @param user 用户参数
      * @return 是否已登录的标识
      */

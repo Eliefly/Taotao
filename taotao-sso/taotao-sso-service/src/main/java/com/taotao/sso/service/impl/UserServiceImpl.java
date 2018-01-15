@@ -106,8 +106,8 @@ public class UserServiceImpl implements UserService {
         try {
             if (loginUser != null) {
 
-                // 生成唯一数ticket,可是使用redis的唯一数+用户id
-                String ticket = "" + jedisClientCluster.incr(ssoTaotaoTicketIncr) + loginUser.getId();
+                // 生成唯一数ticket,可是使用redis的唯一数+"_"+用户id (SSO_TAOTAO_TICKET_KEY_12_9)
+                String ticket = "" + jedisClientCluster.incr(ssoTaotaoTicketIncr) + "_" + loginUser.getId();
 
                 // 把ticket和用户数据放到redis中,模拟session，原来的session有效时间是半小时
                 jedisClientCluster.set(ssoTaoTaoTicketKey + ticket, JsonUtils.objectToJson(loginUser), 60 * 30);

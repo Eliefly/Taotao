@@ -32,8 +32,8 @@ public class UserController {
     /**
      * cookies中存放ticket的cookiename, 通过此cookiename可从cookies中取出ticket
      */
-    @Value("${COOKIE_NAME}")
-    private String cookieName;
+    @Value("${TT_TICKET_COOKIE_NAME}")
+    private String taotaoTicketCookieName;
 
     /**
      * 注册用户
@@ -70,7 +70,7 @@ public class UserController {
         // 判断ticket是否为空，如果不为空表示用户登录成功
         if (StringUtils.isNotBlank(ticket)) {
             // 如果登录成功ticket需要放到cookie中
-            CookieUtils.setCookie(request, response, cookieName, ticket, 60 * 60 * 24, true);
+            CookieUtils.setCookie(request, response, taotaoTicketCookieName, ticket, 60 * 60 * 24, true);
             HashMap<String, Object> map = new HashMap<>();
             map.put("status", 200);
             return map;

@@ -11,7 +11,7 @@
 
     <context:property-placeholder location="classpath:resource/*.properties"/>
     <!-- 配置组件扫描 -->
-    <context:component-scan base-package="com.taotao.portal.controller"></context:component-scan>
+    <context:component-scan base-package="com.taotao.portal"></context:component-scan>
     <!-- 注解驱动 -->
     <mvc:annotation-driven/>
     <!-- 视图解析器 -->
@@ -28,9 +28,9 @@
     <!-- 引入dubbo服务 -->
     <dubbo:registry address="192.168.56.101:2181" protocol="zookeeper"></dubbo:registry>
     <dubbo:application name="taotao-portal-web"/>
-    <dubbo:reference interface="com.taotao.manager.service.ContentService" id="contentService"
-                     timeout="100000000"></dubbo:reference>
-    <dubbo:reference interface="com.taotao.sso.service.UserService" id="userService"
-                     timeout="100000000"></dubbo:reference>
+    <dubbo:reference interface="com.taotao.manager.service.ContentService" id="contentService" timeout="100000000"/>
+    <dubbo:reference interface="com.taotao.sso.service.UserService" id="userService" timeout="100000000"/>
+    <dubbo:reference interface="com.taotao.cart.service.CartService" id="cartService" timeout="100000000"/>
+    <dubbo:reference interface="com.taotao.manager.service.ItemService" id="itemService" timeout="1000000"/>
 
 </beans>

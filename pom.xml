@@ -22,6 +22,7 @@
         <module>itcast-activemq</module>
         <module>taotao-item-web</module>
         <module>itcast-freemarker</module>
+        <module>taotao-cart</module>
     </modules>
 
     <name>Maven</name>
