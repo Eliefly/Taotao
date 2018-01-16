@@ -201,6 +201,7 @@
    
    $("#loginsubmit").click(function () {
 	    var flag = validateFunction.FORM_validate();
+	    var redirectURL = "${redirectURL}";
 	    if (flag) {
 	        var uuid = $("#uuid").val();
 	        $(this).attr({ "disabled": "disabled" });
@@ -223,7 +224,13 @@
 	                    var obj = eval(result);
 	                    if (obj.status == 200) {
                     		//登录成功，跳转到首页
-                    		obj.success = "http://www.taotao.com/";
+                    		if (redirectURL) {
+                    		    // 当 redirectURL 不为空时执行
+                    		    obj.success = redirectURL;
+                            } else {
+                                obj.success = "http://www.taotao.com/";
+                            }
+
 	                        var isIE = !-[1,];
 	                        if (isIE) {
 	                            var link = document.createElement("a");

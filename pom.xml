@@ -23,6 +23,7 @@
         <module>taotao-item-web</module>
         <module>itcast-freemarker</module>
         <module>taotao-cart</module>
+        <module>taotao-order</module>
     </modules>
 
     <name>Maven</name>

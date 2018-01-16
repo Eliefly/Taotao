@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dbubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
@@ -20,6 +20,14 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/service/order/**"/>
+            <bean class="com.taotao.portal.interceptor.OrderHandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!--静态资源处理-->
     <mvc:resources location="/js/" mapping="js/**"></mvc:resources>
     <mvc:resources location="/css/" mapping="css/**"></mvc:resources>
@@ -32,5 +40,6 @@
     <dubbo:reference interface="com.taotao.sso.service.UserService" id="userService" timeout="100000000"/>
     <dubbo:reference interface="com.taotao.cart.service.CartService" id="cartService" timeout="100000000"/>
     <dubbo:reference interface="com.taotao.manager.service.ItemService" id="itemService" timeout="1000000"/>
+    <dbubbo:reference interface="com.taotao.order.service.OrderService" id="orderService" timeout="1000000"/>
 
 </beans>

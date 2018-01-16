@@ -7,9 +7,8 @@ import com.taotao.pojo.ItemCat;
  * ItemCatMapper
  *
  * @author eliefly
- * @version  2018-01-05
+ * @version 2018-01-05
  */
 public interface ItemCatMapper extends Mapper<ItemCat> {
-
 
 }
